@@ -25,3 +25,5 @@ yarn-error.log*
 # secret environment variables
 .env
 
+
+.vercel
