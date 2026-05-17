@@ -303,10 +303,11 @@ export default function App() {
           </div>
         ) : (
           <div style={{ padding: '20px 0' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 40, alignItems: 'center' }}>
-              <button onClick={() => { setActiveModule(null); setSelectedScan(null); }} className="tactical-btn" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', color: '#94A3B8', cursor: 'pointer', padding: '12px 20px', borderRadius: 14, display: 'flex', alignItems: 'center', gap: 10, fontSize: 11, fontWeight: 800, textTransform: 'uppercase' }}><ArrowLeft size={16} /> ABORT NODE</button>
-              <h2 style={{ fontSize: 14, fontWeight: 900, color: '#fff', letterSpacing: '0.2em' }}>{activeModule.toUpperCase()} ANALYSIS MATRIX</h2>
-            </div>
+            {!selectedScan && (
+              <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: 40 }}>
+                <button onClick={() => { setActiveModule(null); setSelectedScan(null); }} className="tactical-btn" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', color: '#94A3B8', cursor: 'pointer', padding: '12px 20px', borderRadius: 14, display: 'flex', alignItems: 'center', gap: 10, fontSize: 10, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em' }}><ArrowLeft size={16} /> ABORT NODE</button>
+              </div>
+            )}
 
             {selectedScan ? (
               <ScanDetail scan={selectedScan} onBack={() => setSelectedScan(null)} />
