@@ -8,7 +8,7 @@ An advanced, high-performance forensic verification platform engineered to analy
 Experience the application live: [TrustGuard PRO](https://trust-guard-pro.vercel.app)  
 
 
-### 🛠️ Tech Stack HS
+### 🛠️ Tech Stack 
 
 - **Frontend:** React.js, Tailwind CSS, HTML5, CSS3
 - **Backend & Database:** Firebase Firestore
