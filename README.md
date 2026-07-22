@@ -1,4 +1,4 @@
-# TrustGuard - Forensic Verification Suite
+# TrustGuard - Forensic Verification Suite 😇
 
 An advanced, high-performance forensic verification platform engineered to analyze and verify media authenticity across images, videos, audio files, and network traffic logs.
 
