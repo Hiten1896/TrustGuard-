@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+# TrustGuard — Media Forensic Verification Suite
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+TrustGuard is a web-based forensic verification platform for assessing the authenticity of digital media — images, video, audio, and network traffic logs. It's built for workflows where someone needs to quickly inspect a file's metadata and flag signs of tampering, rather than take a media file's authenticity at face value.
 
-## Available Scripts
+**[🔗 Live Demo](https://trust-guard-pro.vercel.app)**
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🧭 Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Purpose:** give forensic analysts / investigators a single workspace to upload media and network logs, and review authenticity signals.
+- **Audience:** built with forensic engineers and investigators in mind — the UI is optimized for reviewing dense, multi-layered metadata rather than a general consumer.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Tech Stack
 
-### `npm test`
+| Layer | Technology |
+|---|---|
+| Frontend | React 19, Vite, Tailwind CSS |
+| Backend / Data | Firebase Firestore |
+| Media Analysis | [`exifr`](https://www.npmjs.com/package/exifr) (EXIF/metadata extraction), [`jsqr`](https://www.npmjs.com/package/jsqr) (QR code detection), [`suncalc`](https://www.npmjs.com/package/suncalc) (sun position calculations — useful for cross-checking claimed shot times/locations against lighting), [`fflate`](https://www.npmjs.com/package/fflate) (fast compression/decompression) |
+| Deployment | Vercel |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🔍 Verification Capabilities
 
-### `npm run build`
+- **Metadata inspection** — extracts EXIF and other embedded metadata from images to check for signs of editing, missing fields, or inconsistencies
+- **QR code detection** — scans images for embedded QR codes as part of media analysis
+- **Lighting/geolocation cross-checks** — uses sun position calculations to help flag mismatches between a file's claimed capture time/location and expected lighting conditions
+- **Centralized workspace** — review findings across image, video, audio, and network log evidence in one place
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+*(If there are additional checks — hash comparison, deepfake detection, network log parsing logic — add them here; the above reflects what's evident from the current dependency set.)*
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🔒 Security & Architecture
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Firestore access control** — custom `firestore.rules` restrict data access to authenticated requests only.
+- **Secrets management** — API keys and backend endpoints are kept out of source control via `.env` (see setup below); `.env.example` documents the required variables without exposing real values.
+- **Responsive workspace** — UI is optimized for reviewing multi-layered metadata across device sizes.
 
-### `npm run eject`
+## 🚀 Getting Started
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Prerequisites**
+- Node.js 18+
+- A Firebase project with Firestore enabled
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**1. Clone the repo**
+```bash
+git clone https://github.com/Hiten1896/TrustGuard-.git
+cd TrustGuard-
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**2. Install dependencies**
+```bash
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**3. Configure environment variables**
+```bash
+cp .env.example .env
+```
+Fill in `.env` with your Firebase project credentials (see `.env.example` for the full list of variables this project expects).
 
-## Learn More
+**4. Run the dev server**
+```bash
+npm run dev
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**5. Build for production**
+```bash
+npm run build
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**6. Preview the production build locally**
+```bash
+npm run preview
+```
 
-### Code Splitting
+## 📁 Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+trustguard/
+├── src/                 # Application source (components, logic)
+├── public/              # Static assets
+├── firestore.rules       # Firestore security rules
+├── vite.config.js        # Vite build configuration
+├── vercel.json           # Vercel deployment configuration
+├── .env.example           # Template for required environment variables
+└── package.json
+```
 
-### Analyzing the Bundle Size
+## 🗺️ Roadmap
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- [ ] Add automated tests
+- [ ] Expand supported file formats
+- [ ] API documentation for programmatic access
 
-### Making a Progressive Web App
+## 🤝 Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Contributions are welcome. Please open an issue to discuss significant changes before submitting a pull request.
 
-### Advanced Configuration
+## 📄 License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+All Rights Reserved. See [LICENSE](./LICENSE) for details. This code is source-visible for portfolio/demonstration purposes; it is not licensed for reuse, modification, or redistribution.
